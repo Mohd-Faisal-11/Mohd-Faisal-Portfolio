@@ -38,3 +38,34 @@ readMoreBtn.addEventListener("click", () => {
         readMoreBtn.textContent = "Read Less"
     }
 })
+
+// =============== Control contact form ===========
+
+const contactForm = document.querySelector("#contact-form")
+
+contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(contactForm);
+
+    try {
+        const response = await fetch(contactForm.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+                Accept : "Application/json"
+            }
+        })
+
+        if (response.ok) {
+            contactForm.reset();
+            alert("Message sent successfully")
+        }
+        else {
+            alert("Something went wrong, Please try agin ")
+        }
+    }
+    catch (error) {
+        alert("An error occured, Please retry!")
+    }
+})
